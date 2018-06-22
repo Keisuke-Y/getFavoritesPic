@@ -3,6 +3,7 @@ import tweepy
 import json
 import requests
 import time
+import os
 """
 *******************READ ME********************
 ■前準備
@@ -36,6 +37,8 @@ auth.set_access_token(ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
 # TwitterAPIハンドル取得
 api = tweepy.API(auth)
 
+# 保存用ディレクトリ
+SAVE_DIR = "./pic/"
 # 画像取得
 # 1 いいね取得
 res = api.favorites('nesosuke',count=200)
@@ -50,8 +53,11 @@ for twi in res:
             # 2-3 画像かどうか確認
             if picData['type'] == 'photo':
                 # 2-4 ファイル名決定(URLの最後の「/」以降)
+                # 2-4-1 保存用ディレクトリがなければ作成
+                if not os.path.exists(SAVE_DIR):
+                    os.makedirs(SAVE_DIR)
                 fileName = picData['media_url_https'].split("/")[-1]
-                filePath = './pic/' + fileName
+                filePath = SAVE_DIR + fileName
                 # 2-5 画像取得Req
                 req = requests.get(picData['media_url_https'])
                 # 2-6 200Rsp　正常時
