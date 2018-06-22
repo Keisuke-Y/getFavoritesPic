@@ -2,6 +2,7 @@
 import tweepy
 import json
 import requests
+import time
 """
 *******************READ ME********************
 ■前準備
@@ -23,10 +24,10 @@ import requests
 ***********************************************
 """
 # API用のキー
-CUSTOMER_KEY = "XXXXXXXXXXXXXXXX"
-CUSTOMER_SECRET = "XXXXXXXXXXXXXXXX"
-ACCESS_TOKEN = "XXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXX"
-ACCESS_TOKEN_SECRET = "XXXXXXXXXXXXXXXX"
+CUSTOMER_KEY = "FfYhUgNHZFvwtdJTcihFTkEJE"
+CUSTOMER_SECRET = "fRFvuSSbY1PjiSnd5stJECSqovtuA6sZ1rMDLLzvcfYIzUBmBa"
+ACCESS_TOKEN = "106067637-GU5BXqQPb1NZn2YrMSmGcriEclW3ANATdMLXFI6y"
+ACCESS_TOKEN_SECRET = "XXXYNcZJDMv7UzOTaWsBrj59HPAdnyBW2wxh1srQrdWw1WAeXXXXXXXXXXXXX"
 
 # OAuthの準備
 auth = tweepy.OAuthHandler(CUSTOMER_KEY,CUSTOMER_SECRET)
@@ -41,6 +42,7 @@ res = api.favorites('nesosuke',count=200)
 print(len(res))
 # 2 各ツイートごとに画像確認
 for twi in res:
+    time.sleep(1)
     #2-1 画像の有無確認
     if 'media' in twi._json['entities']: 
         # 2-2 複数画像に対応
