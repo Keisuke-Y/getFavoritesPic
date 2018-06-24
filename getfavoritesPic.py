@@ -24,12 +24,24 @@ import os
 　count：いいねの取得件数
 ***********************************************
 """
+############################################
+# ここから設定項目
 # API用のキー
 CUSTOMER_KEY = "FfYhUgNHZFvwtdJTcihFTkEJE"
 CUSTOMER_SECRET = "fRFvuSSbY1PjiSnd5stJECSqovtuA6sZ1rMDLLzvcfYIzUBmBa"
 ACCESS_TOKEN = "106067637-GU5BXqQPb1NZn2YrMSmGcriEclW3ANATdMLXFI6y"
-ACCESS_TOKEN_SECRET = "XXXYNcZJDMv7UzOTaWsBrj59HPAdnyBW2wxh1srQrdWw1WAeXXXXXXXXXXXXX"
+ACCESS_TOKEN_SECRET = "YNcZJDMv7UzOTaWsBrj59HPAdnyBW2wxh1srQrdWw1WAe"
 
+# 走査対象のscreen_nameとツイート数を指定
+target_user = 'nesosuke'
+getcount = '5'
+
+# 保存用ディレクトリ(絶対パスで書く)
+SAVE_DIR = "/home/neso/Pictures/twitter-pics/"
+
+
+# ここまで設定項目
+############################################
 # OAuthの準備
 auth = tweepy.OAuthHandler(CUSTOMER_KEY,CUSTOMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
@@ -37,11 +49,9 @@ auth.set_access_token(ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
 # TwitterAPIハンドル取得
 api = tweepy.API(auth)
 
-# 保存用ディレクトリ
-SAVE_DIR = "./pic/"
 # 画像取得
 # 1 いいね取得
-res = api.favorites('nesosuke',count=200)
+res = api.favorites(target_user,count=getcount)
 print(len(res))
 # 2 各ツイートごとに画像確認
 for twi in res:
@@ -56,7 +66,7 @@ for twi in res:
                 # 2-4-1 保存用ディレクトリがなければ作成
                 if not os.path.exists(SAVE_DIR):
                     os.makedirs(SAVE_DIR)
-                fileName = picData['media_url_https'].split("/")[-1]
+       	        fileName = format(twi.user._json['screen_name']) + '-' + format(twi.user._json['id']) + '-' + picData['media_url_https'].split("/")[-1]
                 filePath = SAVE_DIR + fileName
                 # 2-5 画像取得Req
                 req = requests.get(picData['media_url_https'])
