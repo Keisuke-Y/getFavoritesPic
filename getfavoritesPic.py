@@ -34,7 +34,7 @@ ACCESS_TOKEN_SECRET = "YNcZJDMv7UzOTaWsBrj59HPAdnyBW2wxh1srQrdWw1WAe"
 
 # 走査対象のscreen_nameとツイート数を指定
 target_user = 'nesosuke'
-getcount = '5'
+getcount = '200'
 
 # 保存用ディレクトリ(絶対パスで書く)
 SAVE_DIR = "/home/neso/Pictures/twitter-pics/"
