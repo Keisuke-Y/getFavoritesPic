@@ -10,8 +10,6 @@ import os
 ①pipを入れる（詳細はググること）
 ②pip install tweepy   でtweepyを取得
 ③pip install requests でrequestsを取得
-④コードを動かすディレクトリに
-  ./pic/ を作成する。
 
 ■設定値関連
 # API用のキー
@@ -19,7 +17,7 @@ import os
 
 # 画像取得
 1 いいね取得
-　res = api.favorites(screen_name = 'nesosuke',count = 200)
+　res = api.favorites(screen_name = screen_name, count = 200)
 　screen_name：対象のユーザのスクリーンネーム
 　count：いいねの取得件数
 ***********************************************
