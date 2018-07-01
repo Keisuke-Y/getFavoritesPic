@@ -64,7 +64,7 @@ for twi in res:
                 # 2-4-1 保存用ディレクトリがなければ作成
                 if not os.path.exists(SAVE_DIR):
                     os.makedirs(SAVE_DIR)
-       	        fileName = format(twi.user._json['screen_name']) + '-' + format(twi.user._json['id']) + '-' + picData['media_url_https'].split("/")[-1]
+       	        fileName = format(twi.user._json['screen_name']) + '-' + picData['media_url_https'].split("/")[-1]
                 filePath = SAVE_DIR + fileName
                 # 2-5 画像取得Req
                 req = requests.get(picData['media_url_https'])
