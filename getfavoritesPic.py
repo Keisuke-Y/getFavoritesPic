@@ -34,8 +34,8 @@ ACCESS_TOKEN_SECRET = "YNcZJDMv7UzOTaWsBrj59HPAdnyBW2wxh1srQrdWw1WAe"
 target_user = 'nesosuke'
 getcount = '200'
 
-# 保存用ディレクトリ(絶対パスで書く)
-SAVE_DIR = "/home/neso/Pictures/twitter-pics/"
+# 保存用ディレクトリ
+SAVE_DIR = "./Pictures/twitter-pics/"
 
 
 # ここまで設定項目
