@@ -41,30 +41,31 @@ SAVE_DIR = "./Pictures/twitter-pics/"
 # ここまで設定項目
 ############################################
 # OAuthの準備
-auth = tweepy.OAuthHandler(CUSTOMER_KEY,CUSTOMER_SECRET)
-auth.set_access_token(ACCESS_TOKEN,ACCESS_TOKEN_SECRET)
+auth = tweepy.OAuthHandler(CUSTOMER_KEY, CUSTOMER_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
 # TwitterAPIハンドル取得
 api = tweepy.API(auth)
 
 # 画像取得
 # 1 いいね取得
-res = api.favorites(target_user,count=getcount)
+res = api.favorites(target_user, count=getcount)
 print(len(res))
 # 2 各ツイートごとに画像確認
 for twi in res:
     time.sleep(1)
-    #2-1 画像の有無確認
-    if 'media' in twi._json['entities']: 
+    # 2-1 画像の有無確認
+    if 'media' in twi._json['entities']:
         # 2-2 複数画像に対応
-        for  picData in twi._json['entities']['media']: 
+        for picData in twi._json['entities']['media']:
             # 2-3 画像かどうか確認
             if picData['type'] == 'photo':
                 # 2-4 ファイル名決定(URLの最後の「/」以降)
                 # 2-4-1 保存用ディレクトリがなければ作成
                 if not os.path.exists(SAVE_DIR):
                     os.makedirs(SAVE_DIR)
-       	        fileName = format(twi.user._json['screen_name']) + '-' + picData['media_url_https'].split("/")[-1]
+                fileName = format(
+                    twi.user._json['screen_name']) + '-' + picData['media_url_https'].split("/")[-1]
                 filePath = SAVE_DIR + fileName
                 # 2-5 画像取得Req
                 req = requests.get(picData['media_url_https'])
@@ -75,4 +76,3 @@ for twi in res:
                     f.write(req.content)
                     f.close()
                     print(picData['media_url_https'])
-    
